@@ -10,6 +10,10 @@ Microsoft .NET Framework 2.0 or Higher
 ## Download
 [TCP Port Check](https://github.com/chenshaoju/tcpportcheck/releases)
 
+If your using Windows 10, or Installed [Microsoft .NET Framework 4](https://dotnet.microsoft.com/download/thank-you/net472) or higher Please download `TCPPortCheck-dotNet4.exe`.
+
+If your using older operation system or not install Microsoft .NET Framework 4, Please download `TCPPortCheck.exe`.
+
 ## Reference
 [check_client_tcp_port.vb](https://gist.github.com/elpatron68/257e4e2531fdb8729874)
 
