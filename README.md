@@ -1,5 +1,5 @@
 # TCP 端口测试（TCP Port Check）
-用于检查从当前计算机到远程计算机特定端口的连通性测试工具。
+用于检查从当前计算机到远程计算机指定端口的连通性测试工具。
 
 [English](https://github.com/chenshaoju/tcpportcheck/blob/master/README_ENG.md)
 
