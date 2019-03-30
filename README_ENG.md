@@ -1,6 +1,8 @@
 # TCP Port Check
 A remote tcp port check tool for Microsoft Windows
 
+[中文](https://github.com/chenshaoju/tcpportcheck/README.MD)
+
 ## Environmental requirement
 Microsoft .NET Framework 2.0 or Higher 
 
