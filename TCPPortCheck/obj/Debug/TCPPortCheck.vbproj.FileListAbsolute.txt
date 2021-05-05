@@ -1,0 +1,12 @@
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\bin\Debug\TCPPortCheck.exe.config
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\bin\Debug\TCPPortCheck.exe
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\bin\Debug\TCPPortCheck.pdb
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\bin\Debug\TCPPortCheck.xml
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.vbprojAssemblyReference.cache
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.Form1.resources
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.Resources.resources
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.vbproj.GenerateResource.cache
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.vbproj.CoreCompileInputs.cache
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.exe
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.xml
+C:\Users\User\Source\Repos\chenshaoju\tcpportcheck\TCPPortCheck\obj\Debug\TCPPortCheck.pdb
