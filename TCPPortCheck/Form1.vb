@@ -1,16 +1,25 @@
-﻿Imports System.Net.Sockets
+Imports System.Net.Sockets
 
 Public Class Form1
-    Private Function _CheckTCPPort(ByVal sIPAdress As String, ByVal iPort As Integer, Optional ByVal iTimeout As Integer = 1000)
-        Dim socket As New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+    Private Function _CheckTCPPort(ByVal sIPAddress As String, ByVal iPort As Integer, Optional ByVal iTimeout As Integer = 1000) As Boolean
+        Dim socket As Socket
+        If sIPAddress.Contains(":") Then
+            ' IPv6 address
+            socket = New Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp)
+        Else
+            ' IPv4 address
+            socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+        End If
+
         ' Connect using a timeout (default 5 seconds)
-        Dim result As IAsyncResult = socket.BeginConnect(sIPAdress, iPort, Nothing, Nothing)
+        Dim result As IAsyncResult = socket.BeginConnect(sIPAddress, iPort, Nothing, Nothing)
         Dim success As Boolean = result.AsyncWaitHandle.WaitOne(iTimeout, True)
         If Not success Then
             ' NOTE, MUST CLOSE THE SOCKET
             socket.Close()
             Return False
         End If
+        socket.Close()
         Return True
     End Function
 
@@ -21,7 +30,6 @@ Public Class Form1
         Else
             Label1.Text = "不通"
         End If
-
     End Sub
 
     Private Sub TextBox2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox2.KeyPress
