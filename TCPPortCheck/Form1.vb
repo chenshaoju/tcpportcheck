@@ -1,30 +1,63 @@
+Imports System.Net
 Imports System.Net.Sockets
 
 Public Class Form1
-    Private Function _CheckTCPPort(ByVal sIPAddress As String, ByVal iPort As Integer, Optional ByVal iTimeout As Integer = 1000) As Boolean
-        Dim socket As Socket
-        If sIPAddress.Contains(":") Then
-            ' IPv6 address
-            socket = New Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp)
+    Private Function _CheckTCPPort(ByVal sHost As String, ByVal iPort As Integer, Optional ByVal iTimeout As Integer = 1000) As Boolean
+        Dim ipAddresses() As IPAddress = Nothing
+
+        ' Try to parse as IP address directly first
+        Dim ipAddr As IPAddress = Nothing
+        If IPAddress.TryParse(sHost, ipAddr) Then
+            ipAddresses = New IPAddress() {ipAddr}
         Else
-            ' IPv4 address
-            socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            ' Try to resolve domain name
+            Try
+                ipAddresses = Dns.GetHostAddresses(sHost)
+            Catch ex As Exception
+                ' DNS resolution failed
+                Return False
+            End Try
         End If
 
-        ' Connect using a timeout (default 5 seconds)
-        Dim result As IAsyncResult = socket.BeginConnect(sIPAddress, iPort, Nothing, Nothing)
-        Dim success As Boolean = result.AsyncWaitHandle.WaitOne(iTimeout, True)
-        If Not success Then
-            ' NOTE, MUST CLOSE THE SOCKET
-            socket.Close()
-            Return False
-        End If
-        socket.Close()
-        Return True
+        If ipAddresses Is Nothing OrElse ipAddresses.Length = 0 Then Return False
+
+        ' Try each IP address (IPv4 or IPv6)
+        For Each ip As IPAddress In ipAddresses
+            Dim socket As Socket = Nothing
+            Try
+                socket = New Socket(ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+
+                ' Connect using a timeout
+                Dim result As IAsyncResult = socket.BeginConnect(ip, iPort, Nothing, Nothing)
+                Dim success As Boolean = result.AsyncWaitHandle.WaitOne(iTimeout, True)
+
+                If success Then
+                    ' Check if connection was actually successful
+                    Try
+                        socket.EndConnect(result)
+                        socket.Close()
+                        Return True
+                    Catch
+                        ' Connection failed for this IP, try next
+                    End Try
+                End If
+            Catch
+                ' Socket creation or connection error, try next
+            Finally
+                If socket IsNot Nothing Then socket.Close()
+            End Try
+        Next
+
+        Return False
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Label1.Text = "测试中"
+        ' Use a background thread or similar to avoid UI freezing in a real app, 
+        ' but keeping original logic simple for now.
+        ' Force UI refresh to show "Testing" state
+        Application.DoEvents() 
+        
         If _CheckTCPPort(TextBox1.Text, TextBox2.Text) = True Then
             Label1.Text = "通"
         Else
